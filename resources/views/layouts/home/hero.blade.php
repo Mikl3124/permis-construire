@@ -11,7 +11,7 @@
                 <span class="text-primary text-highlight-warning">
                   <span class="js-typedjs"
                         data-hs-typed-options='{
-                          "strings": ["maison&#8239?", "piscine&#8239?","garage&#8239?", "carport&#8239?" "clôture&#8239?", ],
+                          "strings": ["maison&#8239?", "piscine&#8239?", "extension&#8239?", "clôture&#8239?", "garage&#8239?", "carport&#8239?"],
                           "typeSpeed": 90,
                           "loop": true,
                           "backSpeed": 30,
