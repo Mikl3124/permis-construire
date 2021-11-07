@@ -7,7 +7,7 @@
           <div class="col-lg-5">
             <div class="mb-5">
               <h1 class="display-4 mb-3">
-                Un permis de construire pour votre
+                Un permis de construire pour votre<br>
                 <span class="text-primary text-highlight-warning">
                   <span class="js-typedjs"
                         data-hs-typed-options='{
