@@ -1,6 +1,4 @@
-<!-- Pricing -->
-<div class="overflow-hidden mb-9">
-  <div class="container">
+<div class="container content-space-2 content-space-lg-1">
     <!-- Heading -->
     <div class="w-md-75 text-center mx-md-auto mb-9">
       <h2 class="h1">Nos tarifs</h2>

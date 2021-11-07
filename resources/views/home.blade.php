@@ -4,11 +4,14 @@
   <!-- ========== MAIN CONTENT ========== -->
     @include('layouts.header')
     @include('layouts.home.hero')
+    @include('layouts.home.explains')
     @include('layouts.home.pricing')
     @include('layouts.home.steps')
     @include('layouts.home.cta')
     @include('layouts.home.testimonials')
     @include('layouts.home.faq')
+    @include('layouts.footer')
+
 
   <!-- JS Global Compulsory  -->
   <link rel="stylesheet" href="{{ asset('assets/vendor/aos/dist/aos.css') }}">

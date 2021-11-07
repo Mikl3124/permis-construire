@@ -1,5 +1,5 @@
    <!-- Hero -->
-   <div class="d-lg-flex position-relative">
+   <div class="d-lg-flex position-relative mb-9">
     <div class="container d-lg-flex align-items-lg-center content-space-t-3 content-space-lg-0 min-vh-lg-100">
       <!-- Heading -->
       <div class="w-100">
@@ -11,7 +11,7 @@
                 <span class="text-primary text-highlight-warning">
                   <span class="js-typedjs"
                         data-hs-typed-options='{
-                          "strings": ["maison&#8239?", "piscine&#8239?", "extension&#8239?", "clôture&#8239?", "garage&#8239?", "carport&#8239?"],
+                          "strings": ["maison&#8239?", "piscine&#8239?","garage&#8239?", "carport&#8239?" "clôture&#8239?", ],
                           "typeSpeed": 90,
                           "loop": true,
                           "backSpeed": 30,
@@ -44,7 +44,7 @@
             <use xlink:href="#mainHeroSVG1"/>
           </clipPath>
           <g transform="matrix(1 0 0 1 0 0)" clip-path="url(#mainHeroSVG2)">
-            <image width="750" height="750" xlink:href="./assets/img/750x750/img2.jpg" transform="matrix(1.4462 0 0 1.4448 52.8755 0)"></image>
+            <image width="750" height="750" xlink:href="./assets/img/750x750/permis-construire.jpg" transform="matrix(1.4462 0 0 1.4448 52.8755 0)"></image>
           </g>
         </svg>
       </div>

@@ -10962,3 +10962,16 @@ a.text-dark:focus {
   }
 }
 
+.icon-home {
+  position: relative;
+  display: inline-block;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 0.5rem;
+}
+
+a.no-decoration {
+  text-decoration: none;
+  color: #71869d !important;
+}
+

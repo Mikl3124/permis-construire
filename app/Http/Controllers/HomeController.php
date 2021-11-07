@@ -28,6 +28,6 @@ class HomeController extends Controller
 
     public function form()
     {
-        return view('projet');
+        return view('questionnaire');
     }
 }
