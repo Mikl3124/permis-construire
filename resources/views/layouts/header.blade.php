@@ -56,7 +56,7 @@
 
           <!-- Button -->
           <li class="nav-item">
-            <a class="btn btn-primary btn-transition" href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/" target="_blank">Commencer mon projet</a>
+            <a class="btn btn-primary btn-transition" href="{{ route('form') }}" target="_blank">Commencer mon projet</a>
           </li>
 
           <!-- End Button -->
