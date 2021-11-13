@@ -33,63 +33,62 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                         <div class="mb-4">
+        <label class="form-label" for="signupSimpleLoginEmail">Your email</label>
+        <input type="email" class="form-control form-control-lg" name="email" value="{{ old('email') }}" id="signupSimpleLoginEmail" placeholder="email@site.com" aria-label="email@site.com" required>
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+      </div>
+      <!-- End Form -->
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+      <!-- Form -->
+      <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <label class="form-label" for="signupSimpleLoginPassword">Mot de passe</label>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+          <a class="form-label-link" href="{{ route('password.request') }}">Mot de passe oublié ?</a>
+        </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+        <div class="input-group input-group-merge" data-hs-validation-validate-class>
+          <input type="password" class="js-toggle-password form-control form-control-lg" @error('password') is-invalid @enderror" name="password" id="signupSimpleLoginPassword" required
+                data-hs-toggle-password-options='{
+                 "target": "#changePassTarget",
+                 "defaultClass": "bi-eye-slash",
+                 "showClass": "bi-eye",
+                 "classChangeTarget": "#changePassIcon"
+               }'>
+          <a id="changePassTarget" class="input-group-append input-group-text" href="javascript:;">
+            <i id="changePassIcon" class="bi-eye"></i>
+          </a>
+        </div>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+        <span class="invalid-feedback">Veuillez saisir un mot de passe valide</span>
+      </div>
+      <!-- End Form -->
+                            <div class="d-grid mb-3">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
                             </div>
-                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- JS Plugins Init. -->
+<script>
+  (function() {
+
+    // INITIALIZATION OF TOGGLE PASSWORD
+    // =======================================================
+    new HSTogglePassword('.js-toggle-password')
+  })()
+</script>
+
 @endsection

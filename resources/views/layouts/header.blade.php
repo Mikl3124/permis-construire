@@ -56,8 +56,14 @@
 
           <!-- Button -->
           <li class="nav-item">
-            <a class="btn btn-primary btn-transition" href="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/" target="_blank">Commencer mon projet</a>
-          </li>
+            @if (Auth::check())
+              @if ( auth()->user()->role == 'client')
+                <a class="btn btn-primary btn-transition" href="{{ route('form') }}">Mon tableau de bord</a>
+              @endif
+            @else
+              <a class="btn btn-primary btn-transition" href="{{ route('form') }}">Commencer mon projet</a>
+            @endif
+            </li>
 
           <!-- End Button -->
         </ul>
