@@ -13,6 +13,9 @@
     @include('layouts.footer')
 
 
+
+
+
   <!-- JS Global Compulsory  -->
   <link rel="stylesheet" href="{{ asset('assets/vendor/aos/dist/aos.css') }}">
   <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

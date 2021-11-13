@@ -30,7 +30,7 @@
             <a id="companyMegaMenu" class="hs-mega-menu-invoker nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nos services <i class="fas fa-angle-down"></i></a>
             <!-- Mega Menu -->
             <div class="hs-sub-menu dropdown-menu" aria-labelledby="companyMegaMenu" style="min-width: 14rem;">
-              <a class="dropdown-item" href="#">Permis de construire</a>
+              <a class="dropdown-item" href="{{ route('permis-de-construire') }}">Permis de construire</a>
               <a class="dropdown-item" href="#">Déclaration préalable</a>
             </div>
             <!-- End Mega Menu -->

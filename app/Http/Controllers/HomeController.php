@@ -26,6 +26,11 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function permisConstruire()
+    {
+        return view('permis-construire');
+    }
+
     public function form()
     {
         return view('questionnaire');
