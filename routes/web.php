@@ -19,3 +19,6 @@ Route::get('/logout', 'UserController@logout')->name('logout');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/form', 'HomeController@form')->name('form');
+
+//Questionnaire
+Route::post('/questionnaire-create', 'QuestionnaireController@create')->name('questionnaire-create');
