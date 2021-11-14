@@ -1,9 +1,10 @@
 @extends('layouts.app')
-<script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
 
 <!-- Mapbox  -->
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+<link rel="stylesheet" href="./assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+<script src="./assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
 
 @section('content')
 
@@ -74,58 +75,43 @@
             <div class="card-body">
               <div id='map' style='width: 100%; height: 400px;'></div>
               <!-- Adresse -->
-              <p><small><i>{{ $projet->adresse }}</i></small></p>
               <form action="{{ route('questionnaire-create') }}" method="POST">
                 @csrf
-                <div class="row mt-3">
+                <div class="row mt-5">
                   <div class="mb-4 field">
-                      <input type="search" id="adresse" name="adresse" value="{{ old('adresse')}}" class="form-control" placeholder="Veuillez saisir l'adresse du projet" required>
-                        @if ($errors->has('adresse'))
+                      <!-- Select -->
+                      <div class="tom-select-custom">
+                        <select class="js-select form-select" autocomplete="off"
+                              data-hs-tom-select-options='{
+                                "placeholder": "Selectionnez le type de projet...",
+                                "hideSearch": true
+                              }' onchange="showDiv(this)">
+                          <option value="">Selectionnez le type de projet...</option>
+                          <option value="1">Maison</option>
+                          <option value="2">Extension</option>
+                          <option value="3">Surélévation</option>
+                          <option value="4">Combles</option>
+                          <option value="5">Toiture</option>
+                          <option value="5">Garage</option>
+                        </select>
+                      </div>
+                      <!-- End Select -->
+                        @if ($errors->has('type'))
                           <div class="text-danger">
-                            <small><i>{{ $errors->first('adresse') }}</i></small></span>
+                            <small><i>{{ $errors->first('type') }}</i></small></span>
                           </div>
                         @endif
                   </div>
-                  <div class="form-group col-sm-12 col-md-6">
-                    <div class="mb-4 field">
-                      <input type="search" id="prenom" name="prenom" is-invalid value="{{ old('prenom')}}" class="form-control" placeholder="Prénom" required>
-                        @if ($errors->has('prenom'))
+              <div id="maison" style="display:none;">
+                <div class="mb-4 field">
+                      <input type="text" id="surface" name="surface" value="{{ $projet->surface }}" class="form-control" placeholder="Quelle sera la surface de la maison?">
+                        @if ($errors->has('surface'))
                           <div class="text-danger">
-                            <small><i>{{ $errors->first('prenom') }}</i></small></span>
+                            <small><i>{{ $errors->first('surface') }}</i></small></span>
                           </div>
                         @endif
-                    </div>
                   </div>
-                  <div class="form-group col-sm-12 col-md-6">
-                    <div class="mb-4 field">
-                      <input type="search" name="nom" id="nom" is-invalid value="{{ old('nom')}}" class="form-control" placeholder="Nom" required>
-                        @if ($errors->has('nom'))
-                          <div class="text-danger">
-                            <small><i>{{ $errors->first('nom') }}</i></small></span>
-                          </div>
-                        @endif
-                    </div>
-                  </div>
-                                    <div class="form-group col-sm-12 col-md-6">
-                    <div class="mb-4 field">
-                      <input type="text" id="telephone" name="telephone" is-invalid value="{{ old('telephone')}}" class="form-control" placeholder="Téléphone" required>
-                        @if ($errors->has('telephone'))
-                          <div class="text-danger">
-                            <small><i>{{ $errors->first('telephone') }}</i></small></span>
-                          </div>
-                        @endif
-                    </div>
-                  </div>
-                  <div class="form-group col-sm-12 col-md-6">
-                    <div class="mb-4 field">
-                      <input type="email" id="email" is-invalid name="email" value="{{ old('email')}}" class="form-control" placeholder="Adresse e-mail" required>
-                        @if ($errors->has('email'))
-                          <div class="text-danger">
-                            <small><i>{{ $errors->first('email') }}</i></small></span>
-                          </div>
-                        @endif
-                    </div>
-                  </div>
+              </div>
                 </div>
 
                 <!-- Footer -->
@@ -161,6 +147,16 @@
 </div>
 <!-- End Content -->
 
+<script type="text/javascript">
+function showDiv(select){
+   if(select.value==1){
+    document.getElementById('maison').style.display = "block";
+   } else{
+    document.getElementById('hidden_div').style.display = "none";
+   }
+} 
+</script>
+
   <script>
 (function() {
   var placesAutocomplete = places({
@@ -179,6 +175,7 @@
 <!-- ------------- Script Localisation ---------------------- -->
 <script src="https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js"></script>
 <script src="https://unpkg.com/@mapbox/mapbox-sdk/umd/mapbox-sdk.min.js"></script>
+
 <script>
 
   var mapboxAccessKey = '{{ env('MAPBOX_ACCESS_TOKEN') }}';
@@ -204,6 +201,17 @@
                     .addTo(map);
             }
         });
+        
 </script>
+
+<script>
+  (function() {
+    // INITIALIZATION OF SELECT
+    // =======================================================
+    HSCore.components.HSTomSelect.init('.js-select')
+  });
+</script>
+
+
 
 @endsection

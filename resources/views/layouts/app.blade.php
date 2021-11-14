@@ -25,6 +25,7 @@
     <script src="./assets/vendor/typed.js/lib/typed.min.js"></script>
     <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="./assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
 
     <!-- JS Front -->
