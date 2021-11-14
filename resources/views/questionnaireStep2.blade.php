@@ -77,22 +77,21 @@
               <!-- Adresse -->
               <form action="{{ route('questionnaire-create') }}" method="POST">
                 @csrf
-                <div class="row mt-5">
+                {{--<div class="row mt-5">
                   <div class="mb-4 field">
                       <!-- Select -->
                       <div class="tom-select-custom">
                         <select class="js-select form-select" autocomplete="off"
                               data-hs-tom-select-options='{
-                                "placeholder": "Selectionnez le type de projet...",
+                                "placeholder": "Quel est votre projet ?...",
                                 "hideSearch": true
                               }' onchange="showDiv(this)">
-                          <option value="">Selectionnez le type de projet...</option>
-                          <option value="1">Maison</option>
-                          <option value="2">Extension</option>
-                          <option value="3">Surélévation</option>
-                          <option value="4">Combles</option>
-                          <option value="5">Toiture</option>
-                          <option value="5">Garage</option>
+                          <option value="">Quel est votre projet ?</option>
+                          <option value="1">Construire</option>
+                          <option value="2">Agrandir</option>
+                          <option value="3">Aménager</option>
+                          <option value="4">Rénover</option>
+                          <option value="5">Autre</option>
                         </select>
                       </div>
                       <!-- End Select -->
@@ -102,17 +101,72 @@
                           </div>
                         @endif
                   </div>
-              <div id="maison" style="display:none;">
-                <div class="mb-4 field">
-                      <input type="text" id="surface" name="surface" value="{{ $projet->surface }}" class="form-control" placeholder="Quelle sera la surface de la maison?">
-                        @if ($errors->has('surface'))
-                          <div class="text-danger">
-                            <small><i>{{ $errors->first('surface') }}</i></small></span>
-                          </div>
-                        @endif
+                  <div id="maison" style="display:none;">
+                    <div class="mb-4 field">
+                          <input type="text" id="surface" name="surface" value="{{ $projet->surface }}" class="form-control" placeholder="Quelle sera la surface de la maison?">
+                            @if ($errors->has('surface'))
+                              <div class="text-danger">
+                                <small><i>{{ $errors->first('surface') }}</i></small></span>
+                              </div>
+                            @endif
+                      </div>
                   </div>
-              </div>
+                </div> --}}
+                <div class="row gx-3 mt-5">
+                  <h3 class="text-center">Quel est votre projet ?</h3>
+                  <div class="col-6 col-md-3 mb-3">
+                    <!-- Radio Check -->
+                    <div class="form-check form-check-card text-center">
+                      <input class="form-check-input" type="radio" name="typeOfListing" id="typeOfListing1">
+                      <label class="form-check-label" for="typeOfListing1">
+                        <img class="w-50 mb-3" src="../assets/svg/illustrations/maison.png" alt="maison">
+                        <span class="d-block">Maison</span>
+                      </label>
+                    </div>
+                    <!-- End Radio Check -->
+                  </div>
+                  <!-- End Col -->
+
+                  <div class="col-6 col-md-3 mb-3">
+                    <!-- Radio Check -->
+                    <div class="form-check form-check-card text-center">
+                      <input class="form-check-input" type="radio" name="typeOfListing" id="typeOfListing2" checked>
+                      <label class="form-check-label" for="typeOfListing2">
+                        <img class="w-50 mb-3" src="../assets/svg/illustrations/garage.png" alt="garage">
+                        <span class="d-block">Garage</span>
+                      </label>
+                    </div>
+                    <!-- End Radio Check -->
+                  </div>
+                  <!-- End Col -->
+
+                  <div class="col-6 col-md-3 mb-3">
+                    <!-- Radio Check -->
+                    <div class="form-check form-check-card text-center">
+                      <input class="form-check-input" type="radio" name="typeOfListing" id="typeOfListing3">
+                      <label class="form-check-label" for="typeOfListing3">
+                        <img class="w-50 mb-3" src="../assets/svg/illustrations/piscine.png" alt="piscine">
+                        <span class="d-block">Piscine</span>
+                      </label>
+                    </div>
+                    <!-- End Radio Check -->
+                  </div>
+                  <!-- End Col -->
+
+                  <div class="col-6 col-md-3 mb-3">
+                    <!-- Radio Check -->
+                    <div class="form-check form-check-card text-center">
+                      <input class="form-check-input" type="radio" name="typeOfListing" id="typeOfListing4">
+                      <label class="form-check-label" for="typeOfListing4">
+                        <img class="w-50 mb-3" src="../assets/svg/illustrations/farm-land.svg" alt="SVG">
+                        <span class="d-block">Farms/Land</span>
+                      </label>
+                    </div>
+                    <!-- End Radio Check -->
+                  </div>
+                  <!-- End Col -->
                 </div>
+                <!-- End Row -->
 
                 <!-- Footer -->
                 <div class="card-footer pt-0">
@@ -154,7 +208,7 @@ function showDiv(select){
    } else{
     document.getElementById('hidden_div').style.display = "none";
    }
-} 
+}
 </script>
 
   <script>
@@ -202,7 +256,7 @@ function showDiv(select){
                     .addTo(map);
             }
         });
-        
+
 </script>
 
 <script>
