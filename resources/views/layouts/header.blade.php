@@ -59,6 +59,8 @@
             @if (Auth::check())
               @if ( auth()->user()->role == 'client')
                 <a class="btn btn-primary btn-transition" href="{{ route('form') }}">Mon tableau de bord</a>
+              @elseif ( auth()->user()->role == 'admin')
+                <a class="btn btn-primary btn-transition" href="{{ route('form') }}">Gestion du site</a>
               @endif
             @else
               <a class="btn btn-primary btn-transition" href="{{ route('form') }}">Commencer mon projet</a>

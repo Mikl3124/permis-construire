@@ -25,7 +25,7 @@
             <div class="">
               <!-- Heading -->
               <div class="text-center mb-5 mb-md-7">
-                <h1 class="h2">Welcome back</h1>
+                <h1 class="h2">Bienvenue</h1>
                 <p>Login to manage your account.</p>
               </div>
               <!-- End Heading -->

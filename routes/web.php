@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,5 @@ Route::get('/form', 'HomeController@form')->name('form');
 
 //Questionnaire
 Route::post('/questionnaire-create', 'QuestionnaireController@create')->name('questionnaire-create');
+Route::get('/questionnaire-step1', 'QuestionnaireController@step1')->name('questionnaireStep1');
+Route::get('/questionnaire-stepé', 'QuestionnaireController@step2')->name('questionnaireStep2');

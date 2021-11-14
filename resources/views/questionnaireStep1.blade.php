@@ -39,14 +39,13 @@
               </li>
 
               <li class="step-item">
-                <div class="step-content-wrapper" href="javascript:;"
-                   data-hs-step-form-next-options='{
-                    "targetSelector": "#uploadResumeStepEducation"
-                  }'>
-                  <span class="step-icon step-icon-soft-dark">2</span>
-                  <div class="step-content">
-                    <span class="step-title text-secondary">Votre Projet</span>
-                  </div>
+                <div class="step-content-wrapper">
+                  <a class="step-content-wrapper" href="{{ route('questionnaireStep2') }}">
+                    <span class="step-icon step-icon-soft-dark">2</span>
+                    <div class="step-content">
+                      <span class="step-title text-secondary">Votre Projet</span>
+                    </div>
+                  </a>
                 </div>
               </li>
             </ul>
@@ -79,8 +78,7 @@
                 @csrf
                 <div class="row">
                   <div class="mb-4 field">
-                    <label for="form-address">Adresse du projet</label>
-                      <input type="search" id="adresse" name="adresse" class="form-control" placeholder="Veuillez saisir l'adresse du projet" required>
+                      <input type="search" id="adresse" name="adresse" value="{{ $projet->adresse }}" class="form-control" placeholder="Veuillez saisir l'adresse du projet" required>
                         @if ($errors->has('adresse'))
                           <div class="text-danger">
                             <small><i>{{ $errors->first('adresse') }}</i></small></span>
@@ -89,8 +87,7 @@
                   </div>
                   <div class="form-group col-sm-12 col-md-6">
                     <div class="mb-4 field">
-                      <label for="prenom">Prénom</label>
-                      <input type="search" id="prenom" name="prenom" is-invalid value="{{ old('prenom')}}" class="form-control" placeholder="Prénom" required>
+                      <input type="search" id="prenom" name="prenom" is-invalid value="{{ $user->prenom }}" class="form-control" placeholder="Prénom" required>
                         @if ($errors->has('prenom'))
                           <div class="text-danger">
                             <small><i>{{ $errors->first('prenom') }}</i></small></span>
@@ -100,8 +97,7 @@
                   </div>
                   <div class="form-group col-sm-12 col-md-6">
                     <div class="mb-4 field">
-                      <label for="nom">Nom</label>
-                      <input type="search" name="nom" id="nom" is-invalid value="{{ old('nom')}}" class="form-control" placeholder="Nom" required>
+                      <input type="search" name="nom" id="nom" is-invalid value="{{ $user->name }}" class="form-control" placeholder="Nom" required>
                         @if ($errors->has('nom'))
                           <div class="text-danger">
                             <small><i>{{ $errors->first('nom') }}</i></small></span>
@@ -111,8 +107,7 @@
                   </div>
                                     <div class="form-group col-sm-12 col-md-6">
                     <div class="mb-4 field">
-                      <label for="telephone">Téléphone</label>
-                      <input type="text" id="telephone" name="telephone" is-invalid value="{{ old('telephone')}}" class="form-control" placeholder="Téléphone" required>
+                      <input type="text" id="telephone" name="telephone" is-invalid value="{{ $user->telephone }}" class="form-control" placeholder="Téléphone" required>
                         @if ($errors->has('telephone'))
                           <div class="text-danger">
                             <small><i>{{ $errors->first('telephone') }}</i></small></span>
@@ -122,8 +117,7 @@
                   </div>
                   <div class="form-group col-sm-12 col-md-6">
                     <div class="mb-4 field">
-                      <label for="email">Adresse e-mail</label>
-                      <input type="email" id="email" is-invalid name="email" value="{{ old('email')}}" class="form-control" placeholder="Adresse e-mail" required>
+                      <input type="email" id="email" is-invalid name="email" value="{{ $user->email }}" class="form-control" placeholder="Adresse e-mail" required>
                         @if ($errors->has('email'))
                           <div class="text-danger">
                             <small><i>{{ $errors->first('email') }}</i></small></span>
@@ -149,6 +143,11 @@
 
           </div>
           <!-- End Card -->
+          @if (Auth::guest())
+            <div class="mt-3">
+              <a href="{{ route('login') }}"><p>Déjà client? Connectez-vous</p></a>
+            </div>
+          @endif
         </div>
       </div>
       <!-- End Col -->

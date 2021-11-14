@@ -33,6 +33,6 @@ class HomeController extends Controller
 
     public function form()
     {
-        return view('questionnaire');
+        return view('questionnaireCreate');
     }
 }
