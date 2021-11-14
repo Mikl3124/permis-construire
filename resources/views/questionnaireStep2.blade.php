@@ -194,7 +194,8 @@ function showDiv(select){
                     container: 'map',
                     style: 'mapbox://styles/mapbox/streets-v11',
                     center: feature.center,
-                    zoom: 8
+                    zoom: 15,
+                    interactive: false
                 });
                 new mapboxgl.Marker()
                     .setLngLat(feature.center)
