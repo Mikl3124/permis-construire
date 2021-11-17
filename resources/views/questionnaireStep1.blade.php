@@ -65,7 +65,7 @@
             <!-- Header -->
             <div class="card-header bg-img-start" style="background-image: url(../assets/svg/components/card-1.svg);">
               <div class="flex-grow-1">
-                <span class="d-lg-none">Etape 1 sur 2</span>
+                <span >Etape 1 sur 2</span>
                 <h3 class="card-header-title">Inscription</h3>
               </div>
             </div>

@@ -3,6 +3,8 @@
 <!-- Mapbox  -->
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
 <link rel="stylesheet" href="./assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
 <script src="./assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
 
@@ -65,7 +67,7 @@
             <!-- Header -->
             <div class="card-header bg-img-start" style="background-image: url(../assets/svg/components/card-1.svg);">
               <div class="flex-grow-1">
-                <span class="d-lg-none">Etape 2 sur 2</span>
+                <span >Etape 2 sur 2</span>
                 <h3 class="card-header-title">Votre Projet</h3>
               </div>
             </div>
@@ -117,8 +119,8 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" name="typeOfListing" id="typeOfListing1">
-                      <label class="form-check-label" for="typeOfListing1">
+                      <input class="form-check-input" type="radio" value="maison" name="typeOfListing" id="maison" checked>
+                      <label class="form-check-label" for="maison">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/maison.png" alt="maison">
                         <span class="d-block">Maison</span>
                       </label>
@@ -130,8 +132,8 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" name="typeOfListing" id="typeOfListing2" checked>
-                      <label class="form-check-label" for="typeOfListing2">
+                      <input class="form-check-input" type="radio" value="garage" name="typeOfListing" id="garage">
+                      <label class="form-check-label" for="garage">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/garage.png" alt="garage">
                         <span class="d-block">Garage</span>
                       </label>
@@ -143,8 +145,8 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" name="typeOfListing" id="typeOfListing3">
-                      <label class="form-check-label" for="typeOfListing3">
+                      <input class="form-check-input" type="radio" value="piscine" name="typeOfListing" id="piscine">
+                      <label class="form-check-label" for="piscine">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/piscine.png" alt="piscine">
                         <span class="d-block">Piscine</span>
                       </label>
@@ -156,10 +158,10 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" name="typeOfListing" id="typeOfListing4">
-                      <label class="form-check-label" for="typeOfListing4">
-                        <img class="w-50 mb-3" src="../assets/svg/illustrations/farm-land.svg" alt="SVG">
-                        <span class="d-block">Farms/Land</span>
+                      <input class="form-check-input" type="radio" value="annexe" name="typeOfListing" id="annexe">
+                      <label class="form-check-label" for="annexe">
+                        <img class="w-50 mb-3" src="../assets/svg/illustrations/annexe.png" alt="annexe">
+                        <span class="d-block">Annexe</span>
                       </label>
                     </div>
                     <!-- End Radio Check -->
@@ -167,6 +169,60 @@
                   <!-- End Col -->
                 </div>
                 <!-- End Row -->
+
+                <div class="row gx-3">
+                  <div class="col-6 col-md-3 mb-3">
+                    <!-- Radio Check -->
+                    <div class="form-check form-check-card text-center">
+                      <input class="form-check-input" type="radio" value="fenetre-de-toit" name="typeOfListing" id="fenetre-de-toit">
+                      <label class="form-check-label" for="fenetre-de-toit">
+                        <img class="w-50 mb-3" src="../assets/svg/illustrations/fenetre-de-toit.png" alt="fenetre-de-toit">
+                        <span class="d-block">Fenêtre de toit</span>
+                      </label>
+                    </div>
+                    <!-- End Radio Check -->
+                  </div>
+                  <!-- End Col -->
+
+                  <div class="col-6 col-md-3 mb-3">
+                    <!-- Radio Check -->
+                    <div class="form-check form-check-card text-center">
+                      <input class="form-check-input" type="radio" value="garage" name="typeOfListing" id="garage">
+                      <label class="form-check-label" for="garage">
+                        <img class="w-50 mb-3" src="../assets/svg/illustrations/garage.png" alt="garage">
+                        <span class="d-block">Garage</span>
+                      </label>
+                    </div>
+                    <!-- End Radio Check -->
+                  </div>
+                  <!-- End Col -->
+
+                  <div class="col-6 col-md-3 mb-3">
+                    <!-- Radio Check -->
+                    <div class="form-check form-check-card text-center">
+                      <input class="form-check-input" type="radio" value="piscine" name="typeOfListing" id="piscine">
+                      <label class="form-check-label" for="piscine">
+                        <img class="w-50 mb-3" src="../assets/svg/illustrations/piscine.png" alt="piscine">
+                        <span class="d-block">Piscine</span>
+                      </label>
+                    </div>
+                    <!-- End Radio Check -->
+                  </div>
+                  <!-- End Col -->
+
+                  <div class="col-6 col-md-3 mb-3">
+                    <!-- Radio Check -->
+                    <div class="form-check form-check-card text-center">
+                      <input class="form-check-input" type="radio" value="annexe" name="typeOfListing" id="annexe">
+                      <label class="form-check-label" for="annexe">
+                        <img class="w-50 mb-3" src="../assets/svg/illustrations/annexe.png" alt="annexe">
+                        <span class="d-block">Farms/Land</span>
+                      </label>
+                    </div>
+                    <!-- End Radio Check -->
+                  </div>
+                  <!-- End Col -->
+                </div>
 
                 <!-- Footer -->
                 <div class="card-footer pt-0">
@@ -238,20 +294,24 @@ function showDiv(select){
     mapboxClient.geocoding.forwardGeocode({
         query: "{{ $projet->adresse }}",
         autocomplete: false,
-        limit: 1
-    })
+        limit: 1,
+      })
         .send()
         .then(function (response) {
             if (response && response.body && response.body.features && response.body.features.length) {
                 var feature = response.body.features[0];
                 var map = new mapboxgl.Map({
                     container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
+                    style: 'mapbox://styles/mapbox/satellite-v9',
                     center: feature.center,
-                    zoom: 15,
-                    interactive: false
+                    zoom: 16,
+                    interactive: false,
                 });
-                new mapboxgl.Marker()
+
+                new mapboxgl.Marker({
+                  color: "#4c34e0",
+                  draggable: true
+                  })
                     .setLngLat(feature.center)
                     .addTo(map);
             }
@@ -266,6 +326,7 @@ function showDiv(select){
     HSCore.components.HSTomSelect.init('.js-select')
   });
 </script>
+
 
 
 

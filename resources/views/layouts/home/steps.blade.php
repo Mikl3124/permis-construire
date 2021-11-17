@@ -13,8 +13,8 @@
           <div class="step-content-wrapper">
             <span class="step-icon step-icon-soft-primary">1</span>
             <div class="step-content">
-              <h3>Complétez le formulaire</h3>
-              <p>Complétez dans votre tableau de bord, votre formulaire de départ avec les informations de votre projet ainsi que certaines photos et dimensions.</p>
+              <h3>Etude de votre demande</h3>
+              <p>Nous recueillons les informations essentielles, à l'élaboration de votre dossier.</p>
             </div>
           </div>
         </li>
@@ -23,8 +23,8 @@
           <div class="step-content-wrapper">
             <span class="step-icon step-icon-soft-primary">2</span>
             <div class="step-content">
-              <h3>Validez votre projet</h3>
-              <p>Whether you're a startup or a global enterprise, learn how to integrate with Front.</p>
+              <h3>Montage du projet</h3>
+              <p>Vous recevez la première version de votre dossier, afin de val</p>
             </div>
           </div>
         </li>
@@ -33,7 +33,7 @@
           <div class="step-content-wrapper">
             <span class="step-icon step-icon-soft-primary">3</span>
             <div class="step-content">
-              <h3>Recevez votre dossier</h3>
+              <h3>Reception du dossier</h3>
               <p>We help power millions of businesses to built and run smoothly.</p>
             </div>
           </div>
@@ -43,8 +43,8 @@
           <div class="step-content-wrapper">
             <span class="step-icon step-icon-soft-primary">4</span>
             <div class="step-content">
-              <h3>Démarrez vos travaux</h3>
-              <p>We help power millions of businesses to built and run smoothly.</p>
+              <h3>Suivi et garantie</h3>
+              <p>Nous restons disponibles à tout moment, afin de nous assurer de l'acceptation de votre dossier auprès de la mairie.</p>
             </div>
           </div>
         </li>
