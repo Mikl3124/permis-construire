@@ -17,11 +17,11 @@ class QuestionnaireController extends Controller
     {
       if (Auth::check()){
         $current_user = Auth::user();
-        $current_user ->prenom = $request->prenom;
-        $current_user ->name = $request->nom;
-        $current_user ->telephone = $request->telephone;
-        $current_user ->email = $request->email;
-        $current_user ->save();
+        $current_user->prenom = $request->prenom;
+        $current_user->name = $request->nom;
+        $current_user->telephone = $request->telephone;
+        $current_user->email = $request->email;
+        $current_user->save();
 
         $projet = Projet::find($current_user)->first();
         $projet->adresse = $request->adresse;
@@ -81,6 +81,11 @@ class QuestionnaireController extends Controller
         return view('questionnaireStep2', compact('user', 'projet'));
     }
     return redirect('questionnaire-create');
+    }
+
+    public function submit(Request $request)
+    {
+      return view('dashboard');
     }
 
 }

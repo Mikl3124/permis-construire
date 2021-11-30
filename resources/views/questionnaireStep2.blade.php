@@ -77,7 +77,7 @@
             <div class="card-body">
               <div id='map' style='width: 100%; height: 400px;'></div>
               <!-- Adresse -->
-              <form action="{{ route('questionnaire-create') }}" method="POST">
+              <form action="{{ route('questionnaire-submit') }}" method="POST">
                 @csrf
                 {{--<div class="row mt-5">
                   <div class="mb-4 field">
