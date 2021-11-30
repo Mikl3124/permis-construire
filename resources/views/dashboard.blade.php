@@ -19,14 +19,14 @@
         <div class="row align-items-center">
           <div class="col">
             <div class="d-none d-lg-block">
-              <h1 class="h2 text-white">Personal info</h1>
+              <h1 class="h2 text-white">Tableau de bord</h1>
             </div>
           </div>
           <!-- End Col -->
 
           <div class="col-auto">
             <div class="d-none d-lg-block">
-              <a class="btn btn-soft-light btn-sm" href="#">Log out</a>
+              <a class="btn btn-soft-light btn-sm" href="#">Déconnexion</a>
             </div>
 
             <!-- Responsive Toggle Button -->
@@ -171,23 +171,23 @@
           <!-- Card -->
           <div class="card">
             <!-- Header -->
-            <div class="card-header border-bottom">
-              <h5 class="card-header-title">Votre projet</h5>
+            <div class="card-header-dashboard">
+              <h5 class="card-header-title text-primary">Votre projet</h5>
             </div>
             <!-- End Header -->
 
             <!-- Body -->
-            <div class="card-body">
+            <div class="card-body-dashboard">
               <div class="row">
                 <div class="col-sm-6 mb-5 mb-sm-7">
                   <!-- Card -->
                   <div class="card card-dashed" href="javascript:;" data-bs-toggle="modal" data-bs-target="#accountAddAddressModal">
                     <div class="card-body card-dashed-body">
-                      <h5 class="text-primary">
+                      <h5>
                         Votre projet: <sup style="font-size: 10px"><a class="text-secondary" href="#"><i class="fas fa-edit"></i></a></sup>
                       </h5>
                       <p>Construction d'une maison d'habitation en Ariège</p>
-                      <h5 class="text-primary">Adresse: </h5>
+                      <h5>Adresse: </h5>
                     </div>
                   </div>
                   <!-- End Card -->
@@ -206,28 +206,16 @@
                 </div>
 
                 <!-- End Col -->
-
-                <div class="col-sm-6 mb-5 mb-sm-7">
-                  <!-- Card -->
-                  <a class="card card-dashed card-centered" href="javascript:;" data-bs-toggle="modal" data-bs-target="#accountAddAddressModal">
-                    <div class="card-body card-dashed-body">
-                      <img class="avatar avatar-xl avatar-4x3 mb-2" src="./assets/img/illustrations/book.png" alt="Image Description">
-                      <span class="d-block"><i class="bi-plus"></i> Add a new address</span>
-                    </div>
-                  </a>
-                  <!-- End Card -->
-                </div>
-                <!-- End Col -->
               </div>
               <!-- End Row -->
             </div>
             <!-- End Body -->
           </div>
           <!-- End Card -->
-          <div class="card mt-4">
+          <div class="card mt-3">
             <!-- Header -->
-            <div class="card-header border-bottom">
-              <h5 class="card-header-title">Votre projet</h5>
+            <div class="card-header">
+              <h5 class="card-header-title text-primary">Vos informations</h5>
             </div>
             <!-- End Header -->
 
