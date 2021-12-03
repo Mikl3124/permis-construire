@@ -25,8 +25,8 @@ class QuestionnaireController extends Controller
 
         $projet = Projet::find($current_user)->first();
         $projet->adresse = $request->adresse;
+        $projet->title = 'Projet de' . ' ' . "$current_user->prenom" . ' ' . "$current_user->nom";
         $projet->save();
-
 
         return view('questionnaireStep2', compact('projet'));
       }
@@ -51,9 +51,11 @@ class QuestionnaireController extends Controller
 
         $projet->user_id = $user->id;
         $projet->adresse = $request->adresse;
-        $projet->status = 'pending';
-        $projet->save();
+        $projet->status = 'pending';  
+        $projet->title = 'Projet de' . ' ' . "$user->prenom" . ' ' . "$user->nom";
 
+        $projet->save();
+  
         Mail::to('bonjour@permis-construire.com')
             ->send(new Formulaire($request->except('_token')));
 
@@ -67,7 +69,7 @@ class QuestionnaireController extends Controller
     {
       if (Auth::check()) {
         $user = Auth::user();
-        $projet = Projet::find($user)->first();
+        $projet = Projet::find($user)->last();
         return view('questionnaireStep1', compact('user', 'projet'));
     }
     return redirect('questionnaire-create');
@@ -77,7 +79,7 @@ class QuestionnaireController extends Controller
     {
       if (Auth::check()) {
         $user = Auth::user();
-        $projet = Projet::find($user)->first();
+        $projet = Projet::find($user)->last();
         return view('questionnaireStep2', compact('user', 'projet'));
     }
     return redirect('questionnaire-create');

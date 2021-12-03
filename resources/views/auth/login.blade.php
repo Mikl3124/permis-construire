@@ -70,7 +70,7 @@
       <!-- End Form -->
                             <div class="d-grid mb-3">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    Connexion
                                 </button>
                             </div>
                     </form>

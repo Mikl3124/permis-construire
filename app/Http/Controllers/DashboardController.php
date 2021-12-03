@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Projet;
+use App\Model\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,8 +12,9 @@ class DashboardController extends Controller
   public function view()
   {
     $user = Auth::user();
-    $projet = Projet::find($user)->first();
+    $projet = Projet::where('user_id', $user->id)->first();
+    $documents_download = Document::where('user_id', $user->id)->get();
 
-    return view('dashboard', compact('user', 'projet'));
+    return view('dashboard', compact('user', 'projet', 'documents_download'));
   }
 }

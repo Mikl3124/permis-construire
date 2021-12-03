@@ -158,13 +158,16 @@
 </div>
 <!-- End Content -->
 
-  <script>
+<script>
 (function() {
   var placesAutocomplete = places({
-   appId: '{{ env('ALGOLIA_APP_ID') }}',
+  appId: '{{ env('ALGOLIA_APP_ID') }}',
   apiKey: '{{ env('ALGOLIA_SECRET') }}',
-    container: document.querySelector('#adresse')
+  container: document.querySelector('#adresse'),
+  }).configure({
+    countries: ['fr']
   });
+ 
 
   placesAutocomplete.on('clear', function() {
     $address.textContent = 'none';

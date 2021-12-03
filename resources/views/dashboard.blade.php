@@ -7,11 +7,79 @@
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
 <link rel="stylesheet" href="./assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
 <script src="./assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
 
 @section('content')
+<!-- ========== HEADER ========== -->
+<header id="header" class="navbar navbar-expand-lg navbar-end navbar-absolute-top navbar-light navbar-show-hide"
+    data-hs-header-options='{
+      "fixMoment": 1000,
+      "fixEffect": "slide"
+    }'>
+    <nav class="js-mega-menu navbar-nav-wrap">
+      <!-- Default Logo -->
+      <a class="navbar-brand" href="{{ route('home') }}" aria-label="Front">
+        <img class="navbar-brand-logo" src="../assets/img/logopc.svg" alt="Logo">
+      </a>
+      <!-- End Default Logo -->
 
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-default">
+          <i class="bi-list"></i>
+        </span>
+        <span class="navbar-toggler-toggled">
+          <i class="bi-x"></i>
+        </span>
+      </button>
+      <!-- End Toggler -->
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <!-- Nos services -->
+          <li class="hs-has-sub-menu nav-item">
+            <a id="companyMegaMenu" class="hs-mega-menu-invoker nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Nos services <i class="fas fa-angle-down"></i></a>
+            <!-- Mega Menu -->
+            <div class="hs-sub-menu dropdown-menu" aria-labelledby="companyMegaMenu" style="min-width: 14rem;">
+              <a class="dropdown-item" href="{{ route('permis-de-construire') }}">Permis de construire</a>
+              <a class="dropdown-item" href="#">Déclaration préalable</a>
+            </div>
+            <!-- End Mega Menu -->
+          </li>
+
+          <!-- Button -->
+          <li class="nav-item">
+            @if (Auth::check())
+                <a class="btn btn-danger btn-transition" href="{{ route('logout') }}">Déconnexion</a>
+            @endif
+            </li>
+
+          <!-- End Button -->
+        </ul>
+      </div>
+      <!-- End Collapse -->
+    </nav>
+</header>
+
+<!-- ========== END HEADER ========== -->
 
   <!-- ========== MAIN CONTENT ========== -->
+  @if ($message = Session::get('success'))      
+    <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+    </div>
+  @endif
+  @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> Un problème est survenu.
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
   <main id="content" role="main" class="bg-light">
     <!-- Breadcrumb -->
     <div class="navbar-dark bg-dark" style="background-image: url(./assets/svg/components/wave-pattern-light.svg);">
@@ -183,21 +251,21 @@
           <!-- Card -->
           <div class="card">
             <div class="card-header-dashboard">
-              <h3 class="card-header-title text-dark">Votre projet</h3>
+              <h3 class="card-header-title text-dark"><i class="fas fa-home text-primary"></i> Votre projet</h3>
             </div>
             <!-- Body -->
             <div class="card-body-dashboard">
               <div class="row">
                 <div class="col-sm-6 mb-5">
                   <!-- Card -->
-                  <div class="card card-dashed" href="javascript:;" data-bs-toggle="modal" data-bs-target="#accountModal">
+                  <div class="card card-dashed">
                     <div class="card-body card-dashed-body">
                       <h5>
-                        Titre: <sup style="font-size: 10px"><a class="text-secondary" href="#"><i class="fas fa-edit"></i></a></sup>
+                        Titre: <sup style="font-size: 10px"><a class="text-secondary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#RenameProject"><i class="fas fa-edit"></i></a></sup>
                       </h5>
-                      <p>Construction d'une maison d'habitation en Ariège</p>
+                      <p>{{ $projet->title }}</p>
                       <h5>Adresse:
-                        <sup style="font-size: 10px"><a class="text-secondary" href="#"><i class="fas fa-edit"></i></a></sup>
+                        <sup style="font-size: 10px"><a class="text-secondary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#ChangeAdresseProject"><i class="fas fa-edit"></i></a></sup>
                       </h5>
                       <p>{{ $projet->adresse }}</p>
                     </div>
@@ -222,7 +290,7 @@
           <div class="card mt-3">
             <div class="card-header-dashboard">
               <h3 class="card-header-title text-dark">
-              Informations importantes</h3>
+             <i class="fas fa-info-circle text-primary"></i> Informations importantes</h3>
             </div>
             <div class="card-body-dashboard">
               <p>Afin de débuter votre projet, merci de bien vouloir valider votre devis</p>
@@ -234,57 +302,65 @@
             <!-- Header -->
             <div class="card-header-dashboard">
               <h3 class="card-header-title text-dark">
-                <i class="far fa-folder"></i> Vos documents
+                <i class="fas fa-folder text-primary"></i> Vos documents
               </h3>
             </div>
             <!-- End Header -->
-
-            <span class="file-input btn btn-primary btn-file">
-                Browse&hellip; <input type="file" multiple>
-            </span>
             <!-- Body -->
             <div class="card-body-dashboard">
               <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <p class="panel-title">
-                      <a class="text-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> </i> Vos documents</a>
-                    </p>
+                    
+                    <!-- Button trigger send Document -->
+                    <div class="d-flex justify-content-between">
+                        <a class="text-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> </i> <h6><i class="fas fa-chevron-down"></i> Documents téléchargés </h6> </a>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upoladFileModal">
+                      Envoyer un document
+                      </button>
+                    </div>
                   </div>
-
 
                   <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
                       <ul class="list-unstyled list-py-2">
-                        <a class="text-secondary" href="#"><li class="ml-5"><i class="far fa-file"></i> Dashboard</li></a>
+                        @forelse ($documents_download as $document)
+                          <div class="d-flex justify-content-start">
+                            <p class="text-secondary ml-3"><li class="mx-2">{{ $document->title }}</li></p>
+                            <a href="{{ route('document.download', ['id' => $document->id]) }}">
+                              <li class="mx-2"><i class="far fa-eye text-secondary"></i></li>
+                            </a>
+                            <a href="{{ route('document.delete', ['id' => $document->id]) }}" onclick="return confirm('Etes-vous su^r de vouloir supprimer ce document ?');">
+                              <li class="ml-5 mx-2"><i class="fas fa-trash text-danger"></i></li>
+                            </a>
+                          </div>
+                        @empty
+                          <small>(Aucun document téléchargé)</small>
+                        @endforelse
+
                       </ul>
                     </div>
                   </div>
                 </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> What is Bootstrap?</a>
-                  </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse in">
-                  <div class="panel-body">
-                    <p>Bootstrap is a sleek, intuitive, and powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="http://schools.inimisttech.com/tutorial/topic/Bootstrap" target="_blank">Learn more.</a></p>
+            </div>
+                            <div class="panel panel-default">
+                  <div class="panel-heading">
+                    
+                    <!-- Button trigger send Document -->
+                    <div class="d-flex justify-content-between">
+                        <a class="text-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> </i> <h6><i class="fas fa-chevron-down"></i> Documents reçus</h6> </a>
+                    </div>
+                  </div>
+
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      
+                      <small>(Aucun document reçu)</small>
+
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-plus"></span> What is CSS?</a>
-                  </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <p>CSS stands for Cascading Style Sheet. CSS allows you to specify various style properties for a given HTML element such as colors, backgrounds, fonts etc. <a href="http://schools.inimisttech.com/tutorial/topic/CSS" target="_blank">Learn more.</a></p>
-                  </div>
-                </div>
-              </div>
             </div>
             <!-- End Body -->
           </div>
@@ -312,170 +388,105 @@
     </div>
   </div>
 
-  <!-- Go To -->
-  <a class="js-go-to go-to position-fixed" href="javascript:;" style="visibility: hidden;"
-     data-hs-go-to-options='{
-       "offsetTop": 700,
-       "position": {
-         "init": {
-           "right": "2rem"
-         },
-         "show": {
-           "bottom": "2rem"
-         },
-         "hide": {
-           "bottom": "-2rem"
-         }
-       }
-     }'>
-    <i class="bi-chevron-up"></i>
-  </a>
+ 
 
-  <!-- Offcanvas Search -->
-  <div class="offcanvas offcanvas-top offcanvas-navbar-search bg-light" tabindex="-1" id="offcanvasNavbarSearch">
-    <div class="offcanvas-body">
-      <div class="container">
-        <div class="w-lg-75 mx-lg-auto">
-          <div class="d-flex justify-content-end mb-3">
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-
-          <div class="mb-7">
-            <!-- Form -->
-            <form>
-              <!-- Input Card -->
-              <div class="input-card">
-                <div class="input-card-form">
-                  <input type="text" class="form-control form-control-lg" placeholder="Search Front" aria-label="Search Front">
-                </div>
-                <button type="button" class="btn btn-primary btn-lg">Search</button>
-              </div>
-              <!-- End Input Card -->
-            </form>
-            <!-- End Form -->
-          </div>
-
-          <div class="d-none d-md-block">
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <h5>Quick Links</h5>
-                </div>
-
-                <div class="row">
-                  <div class="col-6">
-                    <!-- List -->
-                    <ul class="list-pointer list-pointer-primary mb-0">
-                      <li class="list-pointer-item">
-                        <a class="link-sm link-secondary" href="#">Search Results List</a>
-                      </li>
-                      <li class="list-pointer-item">
-                        <a class="link-sm link-secondary" href="#">Search Results Grid</a>
-                      </li>
-                      <li class="list-pointer-item">
-                        <a class="link-sm link-secondary" href="#">About</a>
-                      </li>
-                      <li class="list-pointer-item">
-                        <a class="link-sm link-secondary" href="#">Services</a>
-                      </li>
-                      <li class="list-pointer-item">
-                        <a class="link-sm link-secondary" href="#">Invoice</a>
-                      </li>
-                    </ul>
-                    <!-- End List -->
-                  </div>
-                  <!-- End Col -->
-
-                  <div class="col-6">
-                    <!-- List -->
-                    <ul class="list-pointer list-pointer-primary mb-0">
-                      <li class="list-pointer-item">
-                        <a class="link-sm link-secondary" href="#">Profile</a>
-                      </li>
-                      <li class="list-pointer-item">
-                        <a class="link-sm link-secondary" href="#">User Contacts</a>
-                      </li>
-                      <li class="list-pointer-item">
-                        <a class="link-sm link-secondary" href="#">Reviews</a>
-                      </li>
-                      <li class="list-pointer-item">
-                        <a class="link-sm link-secondary" href="#">Settings</a>
-                      </li>
-                    </ul>
-                    <!-- End List -->
-                  </div>
-                  <!-- End Col -->
-                </div>
-                <!-- End Row -->
-              </div>
-              <!-- End Col -->
-
-              <div class="col-sm-6">
-                <!-- Card -->
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-6">
-                        <img class="img-fluid" src="./assets/img/mockups/img1.png" alt="Image Description">
-                      </div>
-                      <!-- End Col -->
-
-                      <div class="col-6">
-                        <div class="mb-4">
-                          <h5>Featured Item</h5>
-                          <p>Create astonishing web sites and pages.</p>
-                        </div>
-                        <a class="btn btn-outline-primary btn-xs btn-transition" href="#">Apply now <i class="bi-chevron-right small ms-1"></i></a>
-                      </div>
-                      <!-- End Col -->
-                    </div>
-                    <!-- End Row -->
-                  </div>
-                </div>
-                <!-- End Card -->
-              </div>
-              <!-- End Col -->
-            </div>
-            <!-- End Row -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Add New Address Modal -->
-  <div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountModalLabel" role="dialog" aria-hidden="true">
+  <!-- Rename Project Modal -->
+  <div class="modal fade" id="RenameProject" tabindex="-1" aria-labelledby="RenameProjectLabel" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <!-- Header -->
         <div class="modal-header">
-          <h4 class="modal-title" id="accountModalLabel">Renommez votre projet</h4>
+          <h4 class="modal-title" id="RenameProjectLabel">Renommez votre projet</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <!-- End Header -->
         <!-- Body -->
         <div class="modal-body">
           <!-- Form -->
-          <form>
+            <form action="{{ route('rename-project') }}" method="POST">
+              @csrf
             <!-- Form -->
             <div class="mb-1">
               <div class="col-sm-12">
                 <div class="mb-2">
-                  <input type="text" class="form-control" name="city" id="cityLabel" placeholder="City" aria-label="City">
+                  <input type="text" class="form-control" name="project_name" id="projectName" placeholder="{{ $projet->title }}" aria-label="City">
+                  <input type="hidden" name="project_id" value = {{ $projet->id }}>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary btn-sm">Enregistrer</button>
             </div>
-
-            <!-- End Form -->
-          </form>
+          </div>
+         <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Modifier</button>
         </div>
+        </form>
+        <!-- End Form -->
         <!-- End Body -->
       </div>
     </div>
   </div>
-  <!-- ========== END SECONDARY CONTENTS ========== -->
 
+  <!-- Change adresse Modal -->
+  <div class="modal fade" id="ChangeAdresseProject" tabindex="-1" aria-labelledby="ChangeAdresseProjectLabel" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" id="ChangeAdresseProjectLabel">Modifiez l'adresse du projet</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- End Header -->
+        <!-- Body -->
+        <div class="modal-body">
+          <!-- Form -->
+            <form action="{{ route('change-adresse-project') }}" method="POST">
+              @csrf
+            <!-- Form -->
+            <div class="mb-1">
+              <div class="col-sm-12">
+                <div class="mb-2">
+                  <input type="search" id="project_adresse" name="project_adresse" class="form-control"  placeholder="{{ $projet->adresse }}" aria-label="City">
+                  <input type="hidden" name="project_id" value = {{ $projet->id }}>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+        </form>
+        <!-- End Form -->
+        <!-- End Body -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="upoladFileModal" tabindex="-1" role="dialog" aria-labelledby="upoladFileModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="upoladFileModal">Envoyer un Document</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('document-upload') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+              <div class="col-md-12">
+                  <input type="file" name="document" class="form-control">
+                  <input type="hidden" name="projet_id" value="{{ $projet->id }}">
+                  <input type="text" name="title" placeholder="Donnez un nom à ce document" class="form-control mt-2" required>               
+              </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id='buttonDocumentBtn' class="btn btn-primary">Envoyer</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+  <!-- ========== END SECONDARY CONTENTS ========== -->
 
   <!-- JS Global Compulsory  -->
   <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -588,6 +599,24 @@
             }
         });
 
+</script>
+
+<script>
+(function() {
+  var placesAutocomplete = places({
+  appId: '{{ env('ALGOLIA_APP_ID') }}',
+  apiKey: '{{ env('ALGOLIA_SECRET') }}',
+  container: document.querySelector('#project_adresse'),
+  }).configure({
+    countries: ['fr']
+  });
+ 
+
+  placesAutocomplete.on('clear', function() {
+    $address.textContent = 'none';
+  });
+
+})();
 </script>
 
 @endsection
