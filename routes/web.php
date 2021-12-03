@@ -27,3 +27,6 @@ Route::post('/questionnaire-create', 'QuestionnaireController@create')->name('qu
 Route::get('/questionnaire-step1', 'QuestionnaireController@step1')->name('questionnaireStep1');
 Route::get('/questionnaire-stepé', 'QuestionnaireController@step2')->name('questionnaireStep2');
 Route::post('/questionnaire-submit', 'QuestionnaireController@submit')->name('questionnaire-submit');
+
+//Dashboard
+Route::get('/dashboard', 'DashboardController@view')->name('dashboard');

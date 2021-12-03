@@ -85,7 +85,7 @@ class QuestionnaireController extends Controller
 
     public function submit(Request $request)
     {
-      return view('dashboard');
+      return redirect('dashboard');
     }
 
 }
