@@ -78,48 +78,14 @@
               <div id='map' style='width: 100%; height: 400px;'></div>
               <!-- Adresse -->
               <form action="{{ route('questionnaire-submit') }}" method="POST">
+                <input type="hidden" name="projet_id" value={{ $projet->id }}>
                 @csrf
-                {{--<div class="row mt-5">
-                  <div class="mb-4 field">
-                      <!-- Select -->
-                      <div class="tom-select-custom">
-                        <select class="js-select form-select" autocomplete="off"
-                              data-hs-tom-select-options='{
-                                "placeholder": "Quel est votre projet ?...",
-                                "hideSearch": true
-                              }' onchange="showDiv(this)">
-                          <option value="">Quel est votre projet ?</option>
-                          <option value="1">Construire</option>
-                          <option value="2">Agrandir</option>
-                          <option value="3">Aménager</option>
-                          <option value="4">Rénover</option>
-                          <option value="5">Autre</option>
-                        </select>
-                      </div>
-                      <!-- End Select -->
-                        @if ($errors->has('type'))
-                          <div class="text-danger">
-                            <small><i>{{ $errors->first('type') }}</i></small></span>
-                          </div>
-                        @endif
-                  </div>
-                  <div id="maison" style="display:none;">
-                    <div class="mb-4 field">
-                          <input type="text" id="surface" name="surface" value="{{ $projet->surface }}" class="form-control" placeholder="Quelle sera la surface de la maison?">
-                            @if ($errors->has('surface'))
-                              <div class="text-danger">
-                                <small><i>{{ $errors->first('surface') }}</i></small></span>
-                              </div>
-                            @endif
-                      </div>
-                  </div>
-                </div> --}}
                 <div class="row gx-3 mt-5">
                   <h3 class="text-center">Quel est votre projet ?</h3>
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" value="maison" name="typeOfListing" id="maison" checked>
+                      <input class="form-check-input" type="radio" value="maison" name="nature" id="maison" checked>
                       <label class="form-check-label" for="maison">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/maison.png" alt="maison">
                         <span class="d-block">Maison</span>
@@ -132,7 +98,7 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" value="garage" name="typeOfListing" id="garage">
+                      <input class="form-check-input" type="radio" value="garage" name="nature" id="garage">
                       <label class="form-check-label" for="garage">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/garage.png" alt="garage">
                         <span class="d-block">Garage</span>
@@ -145,7 +111,7 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" value="piscine" name="typeOfListing" id="piscine">
+                      <input class="form-check-input" type="radio" value="piscine" name="nature" id="piscine">
                       <label class="form-check-label" for="piscine">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/piscine.png" alt="piscine">
                         <span class="d-block">Piscine</span>
@@ -158,7 +124,7 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" value="annexe" name="typeOfListing" id="annexe">
+                      <input class="form-check-input" type="radio" value="annexe" name="nature" id="annexe">
                       <label class="form-check-label" for="annexe">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/annexe.png" alt="annexe">
                         <span class="d-block">Annexe</span>
@@ -174,7 +140,7 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" value="fenetre-de-toit" name="typeOfListing" id="fenetre-de-toit">
+                      <input class="form-check-input" type="radio" value="fenetre-de-toit" name="nature" id="fenetre-de-toit">
                       <label class="form-check-label" for="fenetre-de-toit">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/fenetre-de-toit.png" alt="fenetre-de-toit">
                         <span class="d-block">Fenêtre de toit</span>
@@ -187,7 +153,7 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" value="garage" name="typeOfListing" id="garage">
+                      <input class="form-check-input" type="radio" value="garage" name="nature" id="garage">
                       <label class="form-check-label" for="garage">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/garage.png" alt="garage">
                         <span class="d-block">Garage</span>
@@ -200,7 +166,7 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" value="piscine" name="typeOfListing" id="piscine">
+                      <input class="form-check-input" type="radio" value="piscine" name="nature" id="piscine">
                       <label class="form-check-label" for="piscine">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/piscine.png" alt="piscine">
                         <span class="d-block">Piscine</span>
@@ -213,7 +179,7 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" value="annexe" name="typeOfListing" id="annexe">
+                      <input class="form-check-input" type="radio" value="annexe" name="nature" id="annexe">
                       <label class="form-check-label" for="annexe">
                         <img class="w-50 mb-3" src="../assets/svg/illustrations/annexe.png" alt="annexe">
                         <span class="d-block">Farms/Land</span>

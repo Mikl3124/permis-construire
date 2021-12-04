@@ -64,7 +64,7 @@
 <!-- ========== END HEADER ========== -->
 
   <!-- ========== MAIN CONTENT ========== -->
-  @if ($message = Session::get('success'))      
+  @if ($message = Session::get('success'))
     <div class="alert alert-success alert-block">
         <button type="button" class="close" data-dismiss="alert">×</button>
             <strong>{{ $message }}</strong>
@@ -268,6 +268,12 @@
                         <sup style="font-size: 10px"><a class="text-secondary" href="javascript:;" data-bs-toggle="modal" data-bs-target="#ChangeAdresseProject"><i class="fas fa-edit"></i></a></sup>
                       </h5>
                       <p>{{ $projet->adresse }}</p>
+                      <h5>Nature du projet:</h5>
+                        @if ($projet->nature === 'annexe')
+                          <p>Construction d'une annexe à l'habitation</p>
+                        @elseif ($projet->nature === 'garage')
+                          <p>Construction d'un garage</p>
+                        @endif
                     </div>
                   </div>
                   <!-- End Card -->
@@ -311,10 +317,10 @@
               <div class="panel-group" id="accordion">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    
+
                     <!-- Button trigger send Document -->
                     <div class="d-flex justify-content-between">
-                        <a class="text-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> </i> <h6><i class="fas fa-chevron-down"></i> Documents téléchargés </h6> </a>
+                        <a class="text-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> </i> <h6><i class="fas fa-chevron-down"></i> Documents attendus </h6> </a>
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#upoladFileModal">
                       Envoyer un document
                       </button>
@@ -323,21 +329,18 @@
 
                   <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
-                      <ul class="list-unstyled list-py-2">
-                        @forelse ($documents_download as $document)
-                          <div class="d-flex justify-content-start">
-                            <p class="text-secondary ml-3"><li class="mx-2">{{ $document->title }}</li></p>
-                            <a href="{{ route('document.download', ['id' => $document->id]) }}">
-                              <li class="mx-2"><i class="far fa-eye text-secondary"></i></li>
-                            </a>
-                            <a href="{{ route('document.delete', ['id' => $document->id]) }}" onclick="return confirm('Etes-vous su^r de vouloir supprimer ce document ?');">
-                              <li class="ml-5 mx-2"><i class="fas fa-trash text-danger"></i></li>
-                            </a>
-                          </div>
-                        @empty
-                          <small>(Aucun document téléchargé)</small>
-                        @endforelse
+                      <ul class="list-unstyled">
+                        <a href="">
+                          <li class="d-flex justify-content-start">
+                            <i class="fas fa-times-circle mx-3 text-muted mt-1"></i>
+                            <p class="text-muted">Croquis de votre projet</p>
+                          </li>
+                        </a>
 
+                            <li class="d-flex justify-content-start">
+                              <i class="fas fa-check-circle mx-3 text-success mt-1"></i>
+                              <p class="text-success">Photo environnement proche</p>
+                            </li>
                       </ul>
                     </div>
                   </div>
@@ -345,7 +348,7 @@
             </div>
                             <div class="panel panel-default">
                   <div class="panel-heading">
-                    
+
                     <!-- Button trigger send Document -->
                     <div class="d-flex justify-content-between">
                         <a class="text-dark" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-plus"></span> </i> <h6><i class="fas fa-chevron-down"></i> Documents reçus</h6> </a>
@@ -354,7 +357,7 @@
 
                   <div id="collapseTwo" class="panel-collapse collapse">
                     <div class="panel-body">
-                      
+
                       <small>(Aucun document reçu)</small>
 
                       </ul>
@@ -388,7 +391,7 @@
     </div>
   </div>
 
- 
+
 
   <!-- Rename Project Modal -->
   <div class="modal fade" id="RenameProject" tabindex="-1" aria-labelledby="RenameProjectLabel" role="dialog" aria-hidden="true">
@@ -473,14 +476,25 @@
         <form action="{{ route('document-upload') }}" method="POST" enctype="multipart/form-data">
             @csrf
               <div class="col-md-12">
-                  <input type="file" name="document" class="form-control">
+                <div class="form-group">
+                  <input type="file" name="document" class="form-control" required>
                   <input type="hidden" name="projet_id" value="{{ $projet->id }}">
-                  <input type="text" name="title" placeholder="Donnez un nom à ce document" class="form-control mt-2" required>               
+                </div>
+                <div class="form-group">
+                  <div class="tom-select-custom">
+                    <select class="form-select" id="type_document" required>
+                      <option value="0" selected>Veuillez choisir le type de document...</option>
+                      <option value="1">Croquis du projet</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                </div>
               </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" id='buttonDocumentBtn' class="btn btn-primary">Envoyer</button>
-      </form>
+        <button type="submit" id='buttonDocumentBtn' class="btn btn-primary" disabled>Envoyer</button>
+        </form>
       </div>
     </div>
   </div>
@@ -610,13 +624,31 @@
   }).configure({
     countries: ['fr']
   });
- 
+
 
   placesAutocomplete.on('clear', function() {
     $address.textContent = 'none';
   });
 
 })();
+</script>
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script text="text/javascript">
+$(document).ready(function(){
+    $('#type_document').change(function(){
+        var val = $('#type_document').val();
+        if (val == 0) {
+            $('#buttonDocumentBtn').attr('disabled','disabled');
+        }else{
+            $('#buttonDocumentBtn').removeAttr('disabled');
+        }
+    });
+});
+
+
+
 </script>
 
 @endsection

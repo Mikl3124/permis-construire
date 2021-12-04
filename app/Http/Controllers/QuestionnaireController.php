@@ -6,9 +6,11 @@ use App\Model\User;
 use App\Model\Projet;
 use App\Mail\Formulaire;
 use Illuminate\Http\Request;
+use MercurySeries\Flashy\Flashy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class QuestionnaireController extends Controller
 {
@@ -51,11 +53,11 @@ class QuestionnaireController extends Controller
 
         $projet->user_id = $user->id;
         $projet->adresse = $request->adresse;
-        $projet->status = 'pending';  
+        $projet->status = 'pending';
         $projet->title = 'Projet de' . ' ' . "$user->prenom" . ' ' . "$user->nom";
 
         $projet->save();
-  
+
         Mail::to('bonjour@permis-construire.com')
             ->send(new Formulaire($request->except('_token')));
 
@@ -75,19 +77,26 @@ class QuestionnaireController extends Controller
     return redirect('questionnaire-create');
     }
 
-    public function step2()
+    public function step2(Request $request)
     {
       if (Auth::check()) {
         $user = Auth::user();
         $projet = Projet::find($user)->last();
         return view('questionnaireStep2', compact('user', 'projet'));
-    }
+      }
     return redirect('questionnaire-create');
     }
 
     public function submit(Request $request)
     {
-      return redirect('dashboard');
+      $projet = Projet::find($request->projet_id);
+      if ($projet->user_id === Auth::user()->id){
+        $projet->nature = $request->nature;
+        $projet->save();
+        return redirect('dashboard');
+      }
+      Flashy::success('Un problème est survenu... ');
+      return Redirect::back();
     }
 
 }
