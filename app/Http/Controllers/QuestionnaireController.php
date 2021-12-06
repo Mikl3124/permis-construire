@@ -84,12 +84,14 @@ class QuestionnaireController extends Controller
         $projet = Projet::find($user)->last();
         return view('questionnaireStep2', compact('user', 'projet'));
       }
+
     return redirect('questionnaire-create');
     }
 
     public function submit(Request $request)
     {
       $projet = Projet::find($request->projet_id);
+
       if ($projet->user_id === Auth::user()->id){
         $projet->nature = $request->nature;
         $projet->save();

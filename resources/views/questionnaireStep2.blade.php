@@ -57,7 +57,6 @@
         <!-- End Sticky Block -->
       </div>
       <!-- End Col -->
-
       <div id="formContainer" class="col-lg-8">
         <!-- End affichage des erreurs -->
         <!-- Content Step Form -->
@@ -78,8 +77,8 @@
               <div id='map' style='width: 100%; height: 400px;'></div>
               <!-- Adresse -->
               <form action="{{ route('questionnaire-submit') }}" method="POST">
-                <input type="hidden" name="projet_id" value={{ $projet->id }}>
                 @csrf
+                <input type="hidden" name="projet_id" value={{ $projet->id }}>
                 <div class="row gx-3 mt-5">
                   <h3 class="text-center">Quel est votre projet ?</h3>
                   <div class="col-6 col-md-3 mb-3">

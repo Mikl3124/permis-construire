@@ -34,10 +34,15 @@ Route::post('/questionnaire-submit', 'QuestionnaireController@submit')->name('qu
 Route::get('/dashboard', 'DashboardController@view')->name('dashboard');
 
 //Projet
-Route::post('/rename-project', 'ProjectController@renameProject')->name('rename-project');
-Route::post('/change-adresse-project', 'ProjectController@changeAdresseProject')->name('change-adresse-project');
+Route::post('/edit-project', 'ProjectController@editProject')->name('project-edit');
+Route::post('/create-type', 'ProjectController@createType')->name('type-create');
 
 //Document
 Route::post('/document-upload', 'DocumentController@uploadDocument')->name('document-upload');
 Route::get('/document/delete/{id}', 'DocumentController@deleteDocument')->name('document.delete');
 Route::get('/document/download/{id}', 'DocumentController@downloadDocument')->name('document.download');
+
+//Admin
+Route::get('/admin/categories', 'Admin\ProjetController@categories')->name('admin.categories');
+  //Categories
+  Route::post('/admin/add-categorie', 'Admin\ProjetController@addCategorie')->name('categorie-add');
