@@ -326,13 +326,14 @@
                       <ul class="list-unstyled list-py-2">
                         @forelse ($documents_download as $document)
                           <div class="d-flex justify-content-start">
-                            <p class="text-secondary ml-3"><li class="mx-2">{{ $document->title }}</li></p>
-                            <a href="{{ route('document.download', ['id' => $document->id]) }}">
+                            <p class="text-secondary ml-3" ><li class="mx-2">{{ $document->title }} </li></p>
+                            <a href="{{ route('document.download', ['id' => $document->id]) }} " data-toggle="tooltip" title="Télécharger le document">
                               <li class="mx-2"><i class="far fa-eye text-secondary"></i></li>
                             </a>
-                            <a href="{{ route('document.delete', ['id' => $document->id]) }}" onclick="return confirm('Etes-vous su^r de vouloir supprimer ce document ?');">
+                            <a href="{{ route('document.delete', ['id' => $document->id]) }}" onclick="return confirm('Etes-vous su^r de vouloir supprimer ce document ?');" data-toggle="tooltip" title="Supprimer le document">
                               <li class="ml-5 mx-2"><i class="fas fa-trash text-danger"></i></li>
                             </a>
+                            <p class ="sendTime text-secondary">Envoyé le: {{ date('d-m-Y', strtotime($document->created_at))}}</p>
                           </div>
                         @empty
                           <small>(Aucun document téléchargé)</small>
