@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Type;
 use App\Model\User;
 use App\Model\Projet;
 use App\Mail\Formulaire;
 use Illuminate\Http\Request;
+use MercurySeries\Flashy\Flashy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class QuestionnaireController extends Controller
 {
@@ -23,12 +26,14 @@ class QuestionnaireController extends Controller
         $current_user->email = $request->email;
         $current_user->save();
 
+        $categories = Type::all();
+
         $projet = Projet::find($current_user)->first();
         $projet->adresse = $request->adresse;
         $projet->title = 'Projet de' . ' ' . "$current_user->prenom" . ' ' . "$current_user->nom";
         $projet->save();
 
-        return view('questionnaireStep2', compact('projet'));
+        return view('questionnaireStep2', compact('projet', 'categories'));
       }
 
         $validatedData = $request->validate([
@@ -51,17 +56,19 @@ class QuestionnaireController extends Controller
 
         $projet->user_id = $user->id;
         $projet->adresse = $request->adresse;
-        $projet->status = 'pending';  
+        $projet->status = 'pending';
         $projet->title = 'Projet de' . ' ' . "$user->prenom" . ' ' . "$user->nom";
 
         $projet->save();
-  
+
         Mail::to('bonjour@permis-construire.com')
             ->send(new Formulaire($request->except('_token')));
 
         Auth::loginUsingId($user->id);
 
-        return view('questionnaireStep2', compact('projet'));
+        $categories = Type::all();
+
+        return view('questionnaireStep2', compact('projet', 'categories'));
 
     }
 
@@ -69,25 +76,39 @@ class QuestionnaireController extends Controller
     {
       if (Auth::check()) {
         $user = Auth::user();
-        $projet = Projet::find($user)->last();
-        return view('questionnaireStep1', compact('user', 'projet'));
+        $projet = Projet::find($request->projet_id);
+        $categories = Type::all();
+
+        return view('questionnaireStep1', compact('user', 'projet', 'categories'));
     }
     return redirect('questionnaire-create');
     }
 
-    public function step2()
+    public function step2(Request $request)
     {
       if (Auth::check()) {
         $user = Auth::user();
-        $projet = Projet::find($user)->last();
-        return view('questionnaireStep2', compact('user', 'projet'));
-    }
+      $projet = Projet::find($request->projet_id);
+        $categories = Type::all();
+
+        return view('questionnaireStep2', compact('user', 'projet', 'categories'));
+      }
+
     return redirect('questionnaire-create');
     }
 
     public function submit(Request $request)
     {
-      return redirect('dashboard');
+
+      $projet = Projet::find($request->projet_id);
+
+      if ($projet->user_id === Auth::user()->id){
+        $projet->nature = $request->nature;
+        $projet->save();
+        return redirect('dashboard');
+      }
+      Flashy::error('Un problème est survenu... ');
+      return Redirect::back();
     }
 
 }

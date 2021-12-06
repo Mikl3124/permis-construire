@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Type;
 use App\Model\User;
 use App\Model\Projet;
 use App\Model\Document;
@@ -42,13 +43,15 @@ class HomeController extends Controller
                 $users = User::all();
                 $documents = Document::all();
                 $projects = Projet::all();
+                $types = Type::all();
+                $item = 'clients';
 
-                return view('admin.dashboard', compact('users', 'documents', 'projects'));
+                return view('admin.dashboard', compact('users', 'documents', 'projects', 'types', 'item'));
             }
         } else {
             return view('questionnaireCreate');
         }
-            
-        
+
+
     }
 }

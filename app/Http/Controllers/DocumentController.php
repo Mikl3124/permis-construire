@@ -26,7 +26,7 @@ class DocumentController extends Controller
             $path_to_store = Storage::disk('s3')->put('documents', $request->document);
 
             $path = Storage::disk('s3')->url($path_to_store);
-            
+
             $document = new Document;
             $document->path = $path_to_store;
             $document->name = $documentName;
@@ -34,11 +34,11 @@ class DocumentController extends Controller
             $document->title = $request->title;
             $document->project_id = $projet->id;
             $document->extension = $request->document->extension();
-            $document->save();
 
-            Flashy::success('Le document a été téléchargé avec succès !');
-
-            return Redirect::back();
+            if($document->save()){
+              Flashy::success('Le document a été téléchargé avec succès !');
+              return Redirect::back();
+            }
         }
         Flashy::error('Une erreur est survenue');
         return Redirect::back();
@@ -46,7 +46,7 @@ class DocumentController extends Controller
     }
 
     public function deleteDocument($id)
-    {   
+    {
         $document = Document::find($id);
         if ($document->user_id === Auth::user()->id) {
             Storage::delete( $document->path);
@@ -61,8 +61,8 @@ class DocumentController extends Controller
 
     public function downloadDocument($id)
     {
-        
-        $document = Document::find($id);    
+
+        $document = Document::find($id);
 
         if ($document->user_id === Auth::user()->id) {
             return Storage::download($document->path);
@@ -70,5 +70,5 @@ class DocumentController extends Controller
         Flashy::error('Vous ne pouvez télécharger ce document !');
         return Redirect::back();
     }
-      
+
 }
