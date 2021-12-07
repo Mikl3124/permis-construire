@@ -18,28 +18,47 @@
   <!-- Body -->
   <div class="card-body-dashboard">
     <div class="row">
-        <div class="col-md-6 col-sm-12">
-          <h5>Prénom:</h5>
+      <div class="col-md-6 col-sm-12">
+        <h5>Prénom:</h5>
+        @if (isset($declarant->prenom))
+          <p>{{ $declarant->prenom }}</p>     
+        @else
           <p>{{ $user->prenom }}</p>
-        </div>
-        <div class="col-md-6 col-sm-12">
-          <h5>Nom:</h5>
+        @endif
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <h5>Nom:</h5>
+        @if (isset($declarant->nom))
+        <p>{{ $declarant->nom }}</p>
+        @else
           <p>{{ $user->name }}</p>
-        </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-sm-12">
+        @endif
+      </div>
+      <div class="col-md-6 col-sm-12 mt-2">
         <h5>Date de naissance:</h5>
-        <p>{{ $user->prenom }}</p>
+        @if (isset($declarant->date))
+          {{ $declarant->date }}
+        @else
+          <p class="text-secondary"><i>Veuillez renseigner cette information</i></p>
+        @endif
+      </div>
+      <div class="col-md-6 col-sm-12 mt-2">
+        <h5>Lieu de naissance:</h5>
+          @if (isset($declarant->lieu))
+            {{ $declarant->lieu }}
+          @else
+            <p class="text-secondary"><i>Veuillez renseigner cette information</i></p>
+          @endif
       </div>
       <div class="col-md-6 col-sm-12">
-        <h5>Lieu de naissance:</h5>
-        <p>{{ $user->name }}</p>
+        <h5>Adresse:</h5>
+          @if (isset($declarant->adresse))
+            {{ $declarant->adresse }}
+          @else
+            {{ $user->adresse }}
+          @endif
       </div>
-  </div>
-
-    <h5>Adresse:</h5>
-    <p class="text-secondary">Veuillez compléter cette information</p>
+    </div>
   </div>
 </div>
 <!-- End Card -->

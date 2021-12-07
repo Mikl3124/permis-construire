@@ -85,7 +85,7 @@
                   <div class="col-6 col-md-3 mb-3">
                     <!-- Radio Check -->
                     <div class="form-check form-check-card text-center">
-                      <input class="form-check-input" type="radio" value="{{ $categorie->name }}" name="nature" id="{{ $categorie->name }}" checked>
+                      <input class="form-check-input" type="radio" value="{{ $categorie->id }}" name="type" id="{{ $categorie->name }}" checked>
                       <label class="form-check-label" for="{{ $categorie->name }}">
                         <img class="w-50 mb-3" src="{{ Storage::url($categorie->image_url) }}" alt="permis de construire pour {{ $categorie->name }}">
                         <span class="d-block">{{ $categorie->name}}</span>

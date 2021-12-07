@@ -37,17 +37,17 @@
           <div class="form-group">
             <div class="form-group">
               <label for="descriptionProjet">Description du projet</label>
-              <textarea class="form-control" name="description" id="descriptionProjet" rows="3"></textarea>
+              <textarea class="form-control" name="description" id="descriptionProjet" rows="3">{{ $projet->description }}</textarea>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-md-6 col-sm-12">
               <label for="exampleInputEmail1">Références cadastrales</label>
-              <input type="text" name="ref_cadastrales" class="form-control" value=" {{$projet->title}} " required>
+              <input type="text" name="ref_cadastrales" class="form-control" value=" {{ $projet->ref_cadastrales }} " required>
             </div>
             <div class="form-group col-md-6 col-sm-12">
               <label for="exampleInputEmail1">Surface du terrain</label>
-              <input type="text" name="surface_terrain" class="form-control" value=" {{$projet->title}} " required>
+              <input type="text" name="surface_terrain" class="form-control" value=" {{ $projet->surface }} " required>
             </div>
           </div>
         </div>

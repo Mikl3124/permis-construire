@@ -42,8 +42,12 @@ Route::post('/document-upload', 'DocumentController@uploadDocument')->name('docu
 Route::get('/document/delete/{id}', 'DocumentController@deleteDocument')->name('document.delete');
 Route::get('/document/download/{id}', 'DocumentController@downloadDocument')->name('document.download');
 
+//Declarant
+Route::post('/declarant-create', 'DeclarantController@createDeclarant')->name('declarant-create');
+
 //Admin
 Route::get('/admin/categories', 'Admin\ProjetController@categories')->name('admin.categories');
   //Categories
   Route::post('/admin/add-categorie', 'Admin\ProjetController@addCategorie')->name('categorie-add');
-Route::get('/admin/categorie-delete/{id}', 'Admin\ProjetController@deleteCategorie')->name('categorie-delete');
+  Route::get('/admin/categorie-delete/{id}', 'Admin\ProjetController@deleteCategorie')->name('categorie-delete');
+

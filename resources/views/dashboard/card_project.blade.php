@@ -27,7 +27,7 @@
             <h5>Adresse:</h5>
             <p>{{ $projet->adresse }}</p>
             <h5>Nature du projet:</h5>
-
+            <p>{{ $projet->type->name }}</p>
           </div>
         </div>
         <!-- End Card -->
@@ -43,7 +43,12 @@
     </div>
     <!-- End Row -->
     <h5>Description du projet:</h5>
-    <p class="text-secondary"><i>Exemple: It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here</i></p>
+    @if (isset($projet->description))
+      <p> {{ $projet->description }} </p>  
+    @else
+         <p class="text-secondary"><i>Exemple: Construction d'une maison d'habitation à étage, toiture 2 pentes en tuile de type romane vieillies, avant-toit et menuiseries en PVC de couleur blanc...</i></p>
+    @endif
+      
   </div>
   <!-- End Body -->
 </div>

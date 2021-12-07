@@ -21,8 +21,15 @@ class ProjectController extends Controller
             $project->title = $request->title;
             $project->adresse = $request->adresse;
             $project->type_id = $type->id;
-            $project->références_adatrales = $request->ref_cadastrales;
-            $project->save();
+            $project->ref_cadastrales = $request->ref_cadastrales;
+            $project->surface = $request->surface_terrain;
+            $project->description = $request->description;
+            if($project->save()){
+                Flashy::success('Le projet a été modifié avec succès');
+                return Redirect::back();
+            }
+            Flashy::error('Une erreur est survenue !!! ');
+            return redirect()->back();          
 
         }
         return redirect()->back();

@@ -18,6 +18,7 @@ class QuestionnaireController extends Controller
 
     public function create(Request $request)
     {
+
       if (Auth::check()){
         $current_user = Auth::user();
         $current_user->prenom = $request->prenom;
@@ -72,7 +73,7 @@ class QuestionnaireController extends Controller
 
     }
 
-    public function step1()
+    public function step1(Request $request)
     {
       if (Auth::check()) {
         $user = Auth::user();
@@ -88,7 +89,7 @@ class QuestionnaireController extends Controller
     {
       if (Auth::check()) {
         $user = Auth::user();
-      $projet = Projet::find($request->projet_id);
+        $projet = Projet::find($request->projet_id);
         $categories = Type::all();
 
         return view('questionnaireStep2', compact('user', 'projet', 'categories'));
@@ -103,7 +104,7 @@ class QuestionnaireController extends Controller
       $projet = Projet::find($request->projet_id);
 
       if ($projet->user_id === Auth::user()->id){
-        $projet->nature = $request->nature;
+        $projet->type_id = $request->type;
         $projet->save();
         return redirect('dashboard');
       }
