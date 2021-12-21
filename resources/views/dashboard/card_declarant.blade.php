@@ -37,6 +37,7 @@
       <div class="col-md-6 col-sm-12 mt-2">
         <h5>Date de naissance:</h5>
         @if (isset($declarant->date))
+        {{ dd($declarant) }}
           {{ $declarant->date }}
         @else
           <p class="text-secondary"><i>Veuillez renseigner cette information</i></p>

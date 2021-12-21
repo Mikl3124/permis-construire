@@ -31,7 +31,7 @@
             <ul id="uploadResumeStepFormProgress" class="js-step-progress step step-icon-xs step-border-last-0 mt-5">
               <li class="step-item">
                 <a class="step-content-wrapper" href="{{ route('questionnaire-create') }}">
-                  <span class="step-icon step-icon-soft-primary">1</span>
+                  <span class="blob step-icon step-icon-soft-primary">1</span>
                   <div class="step-content">
                     <span class="step-title text-primary">Inscription</span>
                   </div>
@@ -126,7 +126,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="card-footer pt-0">
+                <div class="mt-3">
                   <div class="d-flex justify-content-end align-items-center">
                     <button type="submit" class="btn btn-primary submit-btn">Suivant <i class="bi-chevron-right small ms-1"></i>
                     </button>

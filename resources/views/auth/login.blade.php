@@ -35,7 +35,7 @@
 
                          <div class="mb-4">
         <label class="form-label" for="signupSimpleLoginEmail">Your email</label>
-        <input type="email" class="form-control form-control-lg" name="email" value="{{ old('email') }}" id="signupSimpleLoginEmail" placeholder="email@site.com" aria-label="email@site.com" required>
+        <input type="email" class="form-control form-control-lg " name="email" value="{{ old('email') }}" id="signupSimpleLoginEmail" placeholder="email@site.com" aria-label="email@site.com" required>
             @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

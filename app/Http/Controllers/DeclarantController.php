@@ -12,21 +12,19 @@ class DeclarantController extends Controller
 {
 
     public function createDeclarant(Request $request)
-    {   
-        
+    {
         $project = Projet::find($request->project_id)->first();
         if ($project->declarant_id != null){
-            dd('coco');
+            
         }else{
             $declarant = new Declarant;
-            $declarant->nom = $request->nom;
+            $declarant->nom = $request->nom; 
             $declarant->prenom = $request->prenom;
             $declarant->date_naissance = $request->date;
             $declarant->lieu_naissance = $request->lieu;
             $declarant->adresse = $request->adresse;
 
         }
-
 
         if ($declarant->save()) {
             

@@ -18,6 +18,7 @@ class QuestionnaireController extends Controller
 
     public function create(Request $request)
     {
+      
 
       if (Auth::check()){
         $current_user = Auth::user();
@@ -26,10 +27,8 @@ class QuestionnaireController extends Controller
         $current_user->telephone = $request->telephone;
         $current_user->email = $request->email;
         $current_user->save();
-
         $categories = Type::all();
-
-        $projet = Projet::find($current_user)->first();
+        $projet = Projet::where('user_id', Auth::user()->id)->first();
         $projet->adresse = $request->adresse;
         $projet->title = 'Projet de' . ' ' . "$current_user->prenom" . ' ' . "$current_user->nom";
         $projet->save();
@@ -44,6 +43,7 @@ class QuestionnaireController extends Controller
             'telephone' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
+        $projet = $request;
 
         $user = new User;
         $projet = new Projet;
@@ -75,9 +75,10 @@ class QuestionnaireController extends Controller
 
     public function step1(Request $request)
     {
+      
       if (Auth::check()) {
         $user = Auth::user();
-        $projet = Projet::find($request->projet_id);
+        $projet = Projet::where('user_id', Auth::user()->id)->first();
         $categories = Type::all();
 
         return view('questionnaireStep1', compact('user', 'projet', 'categories'));

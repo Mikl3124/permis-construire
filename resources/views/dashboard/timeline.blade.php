@@ -65,7 +65,7 @@
                     data-hs-step-form-next-options='{
                       "targetSelector": "#uploadResumeStepBasics"
                     }'>
-                    <span class="step-icon step-icon-soft-primary">1</span>
+                    <span class="blob step-icon step-icon-soft-primary">1</span>
                     <div class="step-content">
                       <span class="step-title text-primary">Informations projet</span>
                       <span class="step-text">General info about you</span>
@@ -78,9 +78,9 @@
                     data-hs-step-form-next-options='{
                       "targetSelector": "#uploadResumeStepEducation"
                     }'>
-                    <span class="blob step-icon step-icon-soft-secondary">2</span>
+                    <span class="step-icon step-icon-soft-secondary">2</span>
                     <div class="step-content">
-                      <span class="step-title text-primary">Règlement du devis</span>
+                      <span class="step-title text-secondary">Règlement du devis</span>
                     </div>
                   </div>
                 </li>

@@ -41,7 +41,7 @@
               <li class="step-item">
                 <div class="step-content-wrapper">
                   <a class="step-content-wrapper" href="{{ route('questionnaireStep2') }}">
-                    <span class="step-icon step-icon-soft-dark">2</span>
+                    <span class="blob step-icon step-icon-soft-dark">2</span>
                     <div class="step-content">
                       <span class="step-title text-secondary">Votre Projet</span>
                     </div>
@@ -105,7 +105,7 @@
                         @endif
                     </div>
                   </div>
-                                    <div class="form-group col-sm-12 col-md-6">
+                  <div class="form-group col-sm-12 col-md-6">
                     <div class="mb-4 field">
                       <input type="text" id="telephone" name="telephone" is-invalid value="{{ $user->telephone }}" class="form-control" placeholder="Téléphone" required>
                         @if ($errors->has('telephone'))
@@ -128,7 +128,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="card-footer pt-0">
+                <div class="mt-3">
                   <div class="d-flex justify-content-end align-items-center">
                     <button type="submit" class="btn btn-primary submit-btn">Suivant <i class="bi-chevron-right small ms-1"></i>
                     </button>

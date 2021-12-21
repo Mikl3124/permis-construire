@@ -44,7 +44,7 @@
 
               <li class="step-item">
                 <div class="step-content-wrapper">
-                  <span class="step-icon step-icon-soft-primary">2</span>
+                  <span class="blob step-icon step-icon-soft-primary">2</span>
                   <div class="step-content">
                     <span class="step-title text-primary">Votre Projet</span>
                   </div>
@@ -96,7 +96,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="card-footer pt-0">
+                <div class="mt-3">
                   <div class="d-flex justify-content-between align-items-center">
                     <a href="{{ route('questionnaireStep1') }}" class="btn btn-outline-secondary btn-sm"> <i class="bi-chevron-left small ms-1"></i> Précédent
                     </a>
