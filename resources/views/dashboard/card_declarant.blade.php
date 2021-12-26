@@ -34,29 +34,28 @@
           <p>{{ $user->name }}</p>
         @endif
       </div>
-      <div class="col-md-6 col-sm-12 mt-2">
+      <div class="col-md-6 col-sm-12">
         <h5>Date de naissance:</h5>
-        @if (isset($declarant->date))
-        {{ dd($declarant) }}
-          {{ $declarant->date }}
+        @if (isset($declarant->date_naissance))
+          <p>{{ $declarant->date_naissance }}</p>
         @else
-          <p class="text-secondary"><i>Veuillez renseigner cette information</i></p>
+          <p class="text-danger"><i>Veuillez renseigner cette information</i></p>
         @endif
       </div>
-      <div class="col-md-6 col-sm-12 mt-2">
+      <div class="col-md-6 col-sm-12">
         <h5>Lieu de naissance:</h5>
-          @if (isset($declarant->lieu))
-            {{ $declarant->lieu }}
+          @if (isset($declarant->lieu_naissance))
+            <p>{{ $declarant->lieu_naissance }}</p> 
           @else
-            <p class="text-secondary"><i>Veuillez renseigner cette information</i></p>
+            <p class="text-danger"><i>Veuillez renseigner cette information</i></p>
           @endif
       </div>
       <div class="col-md-6 col-sm-12">
         <h5>Adresse:</h5>
           @if (isset($declarant->adresse))
-            {{ $declarant->adresse }}
+            <p>{{ $declarant->adresse }}</p>
           @else
-            {{ $user->adresse }}
+            <p>{{ $user->adresse }}</p>
           @endif
       </div>
     </div>

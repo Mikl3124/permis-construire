@@ -43,11 +43,11 @@
           <div class="row">
             <div class="form-group col-md-6 col-sm-12">
               <label for="exampleInputEmail1">Références cadastrales</label>
-              <input type="text" name="ref_cadastrales" class="form-control" value=" {{ $projet->ref_cadastrales }} " required>
+              <input type="text" name="ref_cadastrales" class="form-control" placeholder="Si inconnu mettre 0" value="{{($projet->ref_cadastrales)}}">
             </div>
             <div class="form-group col-md-6 col-sm-12">
               <label for="exampleInputEmail1">Surface du terrain</label>
-              <input type="text" name="surface_terrain" class="form-control" value=" {{ $projet->surface }} " required>
+              <input type="text" name="surface_terrain" class="form-control" placeholder="Si inconnu mettre 0" value="{{ $projet->surface }}">
             </div>
           </div>
         </div>

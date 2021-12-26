@@ -9,6 +9,7 @@
       <div class="modal-body">
         <form action="{{ route('declarant-create') }}"" method="POST">
           <input type="hidden" name="project_id" value='{{ $projet->id }}'>
+          <input type="hidden" name="declarant_id" value='{{ $declarant->id }}'>
           @csrf
         <div class="row">
           <div class="form-group col-md-6 col-sm-12">
@@ -32,7 +33,7 @@
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Adresse du déclarant</label>
-          <input type="search" id="declarant_adresse" name="adresse" class="form-control"  placeholder="{{ isset($declarant->adresse) ? "$declarant->adresse" : "$user->adresse" }}"" aria-label="City">
+          <input type="search" id="declarant_adresse" name="adresse" class="form-control"  placeholder="Veuillez saisir l'adresse du déclarant" value="{{ isset($declarant->adresse) ? "$declarant->adresse" : "$user->adresse" }}" aria-label="City">
         </div>
       </div>
       <div class="modal-footer">

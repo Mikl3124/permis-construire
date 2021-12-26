@@ -44,11 +44,11 @@ class QuestionnaireController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
         $projet = $request;
-
         $user = new User;
         $projet = new Projet;
         $user->prenom = $request->prenom;
         $user->name = $request->nom;
+        $user->adresse = $request->adresse;
         $user->telephone = $request->telephone;
         $user->email = $request->email;
         $user->role = 'client';
